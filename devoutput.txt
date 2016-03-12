@@ -1,0 +1,21 @@
+**********************************************************************
+File "libs/arthur/reader.py", line 13, in __main__
+Failed example:
+    try:
+        create_corpus(zip_path, corpus_dir, stdout=sys.stdout, overwrite=True)
+    except BatchReadingError as e:
+        print(e.msg)
+        print('last batch was: %i' % e.last_batch)
+    except Exception as e:
+        print(e.message)
+Expected nothing
+Got:
+    File is not a zip file
+**********************************************************************
+File "libs/arthur/reader.py", line 28, in __main__
+Failed example:
+    print(blocks) # doctest:+ELLIPSIS
+Expected:
+    [{'y1': 704.87999999999988, 'x1': 459.35999999999996, 'block_id': 0, 'y': 86.040000000000077, 'x': 54.0, 'project_id': None, 'doc_id': None, 'page': 1.0},...
+Got:
+    []

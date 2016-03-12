@@ -1,1 +1,9 @@
-Flask==0.10.1
+flask
+tornado
+pymongo
+flask-pymongo
+pdfminer
+progressbar
+itsdangerous
+sockjs-tornado>=1.0.2
+redis>=2.10.5

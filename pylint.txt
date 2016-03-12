@@ -1,0 +1,319 @@
+************* Module app
+C: 11, 0: Trailing whitespace (trailing-whitespace)
+E: 18, 0: No name 'pymongo' in module 'flask.ext' (no-name-in-module)
+F: 18, 0: Unable to import 'flask.ext.pymongo' (import-error)
+W: 33,14: Unused argument 'error' (unused-argument)
+************* Module app.mod_cmd.client_instruction
+C:  6, 0: Old-style class defined. (old-style-class)
+************* Module app.mod_cmd.controllers
+W: 10, 0: Relative import 'helpers', should be 'app.mod_cmd.helpers' (relative-import)
+W:  4, 0: Unused import os (unused-import)
+W:  5, 0: Unused import glob (unused-import)
+W:  7, 0: Unused g imported from flask (unused-import)
+W:  7, 0: Unused flash imported from flask (unused-import)
+W:  7, 0: Unused session imported from flask (unused-import)
+W:  9, 0: Unused ArthurProject imported from libs.arthur (unused-import)
+W: 11, 0: Unused import pdb (unused-import)
+************* Module app.mod_cmd.helpers
+C:  1, 0: Missing module docstring (missing-docstring)
+W: 18, 4: Unused variable 'sets' (unused-variable)
+W: 27, 4: Unused variable 'sets' (unused-variable)
+C: 33, 0: Missing function docstring (missing-docstring)
+W:  3, 0: Unused import pdb (unused-import)
+************* Module app.mod_cmd.commands.help
+C: 11, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                ^ (bad-whitespace)
+C: 11, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                             ^ (bad-whitespace)
+C: 33, 0: No space allowed around keyword argument assignment
+def get_docs(cmd = None):
+                 ^ (bad-whitespace)
+C: 68, 0: Wrong continued indentation.
+        for module in os.listdir(pathname)
+        ^       | (bad-continuation)
+C: 69, 0: Wrong continued indentation.
+        if module.endswith(('.py', '.pyc', '.pyo'))])        ^       | (bad-continuation)
+C: 69, 0: Final newline missing (missing-final-newline)
+W: 11, 0: Dangerous default value [] as argument (dangerous-default-value)
+C: 33, 0: Missing function docstring (missing-docstring)
+W: 63, 4: Redefining built-in 'file' (redefined-builtin)
+C: 62, 0: Missing function docstring (missing-docstring)
+W: 63,20: Unused variable 'description' (unused-variable)
+W:  4, 0: Unused import pdb (unused-import)
+************* Module app.mod_cmd.commands.list_docs
+C:  3, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                ^ (bad-whitespace)
+C:  3, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                             ^ (bad-whitespace)
+C:  8, 0: Final newline missing (missing-final-newline)
+W:  3, 0: Dangerous default value [] as argument (dangerous-default-value)
+E:  8,21: Undefined variable 'instruction' (undefined-variable)
+W:  3,24: Unused argument 'args' (unused-argument)
+************* Module app.mod_cmd.commands.status
+C:  5, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                ^ (bad-whitespace)
+C:  5, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                             ^ (bad-whitespace)
+C: 30, 0: Final newline missing (missing-final-newline)
+W:  5, 0: Dangerous default value [] as argument (dangerous-default-value)
+W:  5,24: Unused argument 'args' (unused-argument)
+************* Module app.mod_cmd.commands.projects.create_project
+C:  3, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                ^ (bad-whitespace)
+C:  3, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                             ^ (bad-whitespace)
+C: 16, 0: Trailing whitespace (trailing-whitespace)
+C: 17, 0: Final newline missing (missing-final-newline)
+W:  3, 0: Dangerous default value [] as argument (dangerous-default-value)
+E: 12,19: Undefined variable 'name' (undefined-variable)
+E: 13,21: Undefined variable 'instruction' (undefined-variable)
+W:  3,24: Unused argument 'args' (unused-argument)
+C: 15, 0: Missing function docstring (missing-docstring)
+W: 15,19: Unused argument 'name' (unused-argument)
+************* Module app.mod_cmd.commands.projects.delete_project
+C:  3, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                ^ (bad-whitespace)
+C:  3, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                             ^ (bad-whitespace)
+C: 16, 0: Final newline missing (missing-final-newline)
+W:  3, 0: Dangerous default value [] as argument (dangerous-default-value)
+E: 12,20: Undefined variable 'name' (undefined-variable)
+E: 13,21: Undefined variable 'instruction' (undefined-variable)
+W:  3,24: Unused argument 'args' (unused-argument)
+C: 15, 0: Missing function docstring (missing-docstring)
+W: 15,20: Unused argument 'name' (unused-argument)
+************* Module app.mod_cmd.commands.projects.list_projects
+C:  6, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                ^ (bad-whitespace)
+C:  6, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                             ^ (bad-whitespace)
+C: 14, 0: Final newline missing (missing-final-newline)
+W:  6, 0: Dangerous default value [] as argument (dangerous-default-value)
+W:  6,24: Unused argument 'args' (unused-argument)
+************* Module app.mod_cmd.commands.projects.load_project
+C:  7, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                ^ (bad-whitespace)
+C:  7, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                             ^ (bad-whitespace)
+C: 22, 0: Final newline missing (missing-final-newline)
+W:  7, 0: Dangerous default value [] as argument (dangerous-default-value)
+E: 20,27: Undefined variable 'status' (undefined-variable)
+E: 20,47: Using variable 'instruction' before assignment (used-before-assignment)
+W:  4, 0: Unused import app.mod_cmd.commands.status (unused-import)
+************* Module app.mod_cmd.commands.zip.load_zip
+C:  3, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                ^ (bad-whitespace)
+C:  3, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                             ^ (bad-whitespace)
+C: 11, 0: Final newline missing (missing-final-newline)
+W:  3, 0: Dangerous default value [] as argument (dangerous-default-value)
+E: 11,21: Undefined variable 'instruction' (undefined-variable)
+W:  3,24: Unused argument 'args' (unused-argument)
+************* Module app.mod_cmd.commands.zip.upload_zip
+C:  4, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                ^ (bad-whitespace)
+C:  4, 0: No space allowed around keyword argument assignment
+def run(project = None, args = []):
+                             ^ (bad-whitespace)
+C: 15, 0: Final newline missing (missing-final-newline)
+W:  4, 0: Dangerous default value [] as argument (dangerous-default-value)
+W:  4,24: Unused argument 'args' (unused-argument)
+************* Module app.mod_main.controllers
+C:  9, 0: Final newline missing (missing-final-newline)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  8, 0: Missing function docstring (missing-docstring)
+W:  1, 0: Unused redirect imported from flask (unused-import)
+W:  1, 0: Unused url_for imported from flask (unused-import)
+W:  1, 0: Unused g imported from flask (unused-import)
+W:  1, 0: Unused flash imported from flask (unused-import)
+W:  1, 0: Unused request imported from flask (unused-import)
+W:  1, 0: Unused session imported from flask (unused-import)
+
+
+Report
+======
+174 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |19     |19         |=          |89.47       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |1      |1          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |6      |6          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |20     |20         |=          |70.00       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    app (app.mod_cmd.commands.projects.load_project,app.mod_cmd.commands.projects.list_projects)
+      \-mod_cmd 
+      | \-client_instruction (app.mod_cmd.commands.help,app.mod_cmd.commands.projects.list_projects,app.mod_cmd.commands.status,app.mod_cmd.commands.zip.upload_zip)
+      | \-commands 
+      | | \-status (app.mod_cmd.commands.projects.load_project)
+      | \-controllers (app)
+      | \-helpers (app.mod_cmd.commands.help,app.mod_cmd.controllers)
+      \-mod_main 
+        \-controllers (app)
+    flask (app.mod_main.controllers,app,app.mod_cmd.controllers)
+    jinja2 (app)
+    libs 
+      \-arthur (app.mod_cmd.commands.projects.load_project,app.mod_cmd.controllers)
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |201    |51.67 |202      |-1.00      |
++----------+-------+------+---------+-----------+
+|docstring |132    |33.93 |118      |+14.00     |
++----------+-------+------+---------+-----------+
+|comment   |9      |2.31  |9        |=          |
++----------+-------+------+---------+-----------+
+|empty     |47     |12.08 |38       |+9.00      |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |42     |50       |-8.00      |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |=          |
++-----------+-------+---------+-----------+
+|warning    |40     |40       |=          |
++-----------+-------+---------+-----------+
+|error      |9      |9        |=          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++---------------------------------------------+------+--------+---------+-----------+
+|module                                       |error |warning |refactor |convention |
++=============================================+======+========+=========+===========+
+|app.mod_cmd.commands.projects.create_project |22.22 |7.50    |0.00     |11.90      |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.commands.projects.delete_project |22.22 |7.50    |0.00     |9.52       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.commands.projects.load_project   |22.22 |5.00    |0.00     |7.14       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.commands.zip.load_zip            |11.11 |5.00    |0.00     |7.14       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.commands.list_docs               |11.11 |5.00    |0.00     |7.14       |
++---------------------------------------------+------+--------+---------+-----------+
+|app                                          |11.11 |2.50    |0.00     |2.38       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.controllers                      |0.00  |20.00   |0.00     |0.00       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_main.controllers                     |0.00  |15.00   |0.00     |7.14       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.commands.help                    |0.00  |10.00   |0.00     |19.05      |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.helpers                          |0.00  |7.50    |0.00     |4.76       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.commands.zip.upload_zip          |0.00  |5.00    |0.00     |7.14       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.commands.status                  |0.00  |5.00    |0.00     |7.14       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.commands.projects.list_projects  |0.00  |5.00    |0.00     |7.14       |
++---------------------------------------------+------+--------+---------+-----------+
+|app.mod_cmd.client_instruction               |0.00  |0.00    |0.00     |2.38       |
++---------------------------------------------+------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++------------------------+------------+
+|message id              |occurrences |
++========================+============+
+|bad-whitespace          |19          |
++------------------------+------------+
+|unused-import           |16          |
++------------------------+------------+
+|unused-argument         |10          |
++------------------------+------------+
+|missing-final-newline   |10          |
++------------------------+------------+
+|dangerous-default-value |9           |
++------------------------+------------+
+|missing-docstring       |8           |
++------------------------+------------+
+|undefined-variable      |7           |
++------------------------+------------+
+|unused-variable         |3           |
++------------------------+------------+
+|trailing-whitespace     |2           |
++------------------------+------------+
+|bad-continuation        |2           |
++------------------------+------------+
+|used-before-assignment  |1           |
++------------------------+------------+
+|relative-import         |1           |
++------------------------+------------+
+|redefined-builtin       |1           |
++------------------------+------------+
+|old-style-class         |1           |
++------------------------+------------+
+|no-name-in-module       |1           |
++------------------------+------------+
+|import-error            |1           |
++------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 2.70/10 (previous run: 2.24/10, +0.46)
+
