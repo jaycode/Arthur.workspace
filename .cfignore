@@ -1,13 +1,7 @@
 .git/
-exploration/DRAS_sample_v1_20150605.zip
-exploration/corpus/*
 launchConfigurations/
-node_modules/
-front_end/js/jquery.terminal
-front_end/js/RulesGuide.js
 redis_data/*
 images
 libs/arthur/images
-note_to_self.txt
 libs/arthur/test/test.zip
 user_data/default/_upload/*
