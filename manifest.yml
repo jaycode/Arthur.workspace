@@ -6,4 +6,4 @@ applications:
   name: Arthur workspace
   host: Arthur-workspace
   disk_quota: 1024M
-  buildpack: python_buildpack
+  buildpack: https://github.com/jaycode/python-conda-tensorflow-buildpack.git
