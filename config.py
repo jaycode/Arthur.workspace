@@ -22,7 +22,7 @@ BASE_DIR = os.path.realpath(
 )
 
 # Port to listen to
-LISTENING_PORT = os.getenv('ARTHUR_WS_LISTENING_PORT', 49152)
+LISTENING_PORT = os.getenv('ARTHUR_WS_LISTENING_PORT', os.getenv('VCAP_APP_PORT', 49152))
 
 # Define the database
 MONGO_HOST = os.getenv('ARTHUR_MONGO_HOST', '192.168.56.1')
