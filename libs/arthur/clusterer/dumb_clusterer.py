@@ -20,13 +20,13 @@ base_path = os.path.realpath(
 )
 sys.path.append(base_path)
 
-import nltk
+# import nltk
+# from nltk.corpus.reader.plaintext import PlaintextCorpusReader
+# from nltk.collocations import BigramAssocMeasures, TrigramAssocMeasures, BigramCollocationFinder, TrigramCollocationFinder
+# from nltk import word_tokenize
+# from nltk.tokenize import MWETokenizer
 import string
 import numpy as np
-from nltk.corpus.reader.plaintext import PlaintextCorpusReader
-from nltk.collocations import BigramAssocMeasures, TrigramAssocMeasures, BigramCollocationFinder, TrigramCollocationFinder
-from nltk import word_tokenize
-from nltk.tokenize import MWETokenizer
 from document import ArthurDocument
 
 # Todo: Change to more robust algorithm

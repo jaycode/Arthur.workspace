@@ -1,28 +1,42 @@
 import os
-import sys
-parent_dir = os.path.abspath(os.path.dirname(__file__))
-vendor_dir = os.path.join(parent_dir, 'vendor')
-sys.path.append(vendor_dir)
-
-from tornado.wsgi import WSGIContainer
-from tornado.ioloop import IOLoop
-from tornado.web import FallbackHandler, RequestHandler, Application
-from flask import Flask, render_template, jsonify, request
+import tornado.ioloop
+import tornado.web
+import sockjs.tornado
 from app import app
 
-tr = WSGIContainer(app)
+if __name__ == '__main__':
+    app.listen(os.getenv('VCAP_APP_PORT', 49152))
+    tornado.ioloop.IOLoop.instance().start()
 
-application = Application([
-(r".*", FallbackHandler, dict(fallback=tr)),
-])
+# import os
+# import sys
+# parent_dir = os.path.abspath(os.path.dirname(__file__))
+# vendor_dir = os.path.join(parent_dir, 'vendor')
+# sys.path.append(vendor_dir)
 
-print "starting..."
-if __name__ == "__main__":
-    PORT = int(os.getenv('VCAP_APP_PORT', 49152))
-    HOST = str(os.getenv('VCAP_APP_HOST', 'localhost'))
-    print("Start serving at port %i" % PORT)
-    application.listen(PORT)
-    IOLoop.instance().start()
+# print "one"
+# from tornado.wsgi import WSGIContainer
+# from tornado.ioloop import IOLoop
+# from tornado.web import FallbackHandler, RequestHandler, Application
+# from flask import Flask, render_template, jsonify, request
+# from app import app
+
+# print "two"
+# tr = WSGIContainer(app)
+
+# application = Application([
+# (r".*", FallbackHandler, dict(fallback=tr)),
+# ])
+# print "three"
+
+# print "starting..."
+# if __name__ == "__main__":
+#     PORT = int(os.getenv('VCAP_APP_PORT', 49152))
+#     HOST = str(os.getenv('VCAP_APP_HOST', 'localhost'))
+#     print("Start serving at port %i" % PORT)
+#     application.listen(PORT)
+#     IOLoop.instance().start()
+# print "four"
 
 
 # import os

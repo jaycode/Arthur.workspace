@@ -46,7 +46,7 @@ mongo = MongoClient(uri)
 
 logging.getLogger().setLevel(logging.DEBUG)
 
-WorkspaceRouter = sockjs.tornado.SockJSRouter(WorkspaceConnection, '/')
+WorkspaceRouter = sockjs.tornado.SockJSRouter(WorkspaceConnection, '')
 
 class IndexHandler(tornado.web.RequestHandler):
     """Just a page to show if server is up"""
