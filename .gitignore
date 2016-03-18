@@ -4,4 +4,5 @@ redis_data/*
 images
 libs/arthur/images
 libs/arthur/test/test.zip
-user_data/default/_upload/*
+user_data
+awsconfig

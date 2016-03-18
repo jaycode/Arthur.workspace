@@ -3,6 +3,7 @@
 from app.mod_cmd.client_instruction import ClientInstruction
 from app.helpers import docs_path
 from zipfile import ZipFile
+import app
 
 def run(project = None, args = [], **kwargs):
     """Show status of current project. Keep checking this often!

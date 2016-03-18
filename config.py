@@ -51,3 +51,13 @@ SECRET_KEY = os.getenv('ARTHUR_SECRET_KEY', 'ln129ej1-kl')
 REDIS_HOST = os.getenv('ARTHUR_REDIS_HOST', '192.168.99.100')
 REDIS_PORT = os.getenv('ARTHUR_REDIS_PORT', 6379)
 REDIS_PASSWORD = os.getenv('ARTHUR_REDIS_PASSWORD', '')
+
+# Filesystem settings
+USES_AWS = os.getenv('ARTHUR_USES_AWS', True)
+# Set the rest of settings through environment variables. See:
+# https://boto3.readthedocs.org/en/latest/guide/configuration.html
+
+# For local testing, use awsconfig file to avoid messing with system's
+# environment variables. This is done by not including awsconfig in
+# online version.
+AWSCONFIG_PATH = 
