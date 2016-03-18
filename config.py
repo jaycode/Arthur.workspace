@@ -60,4 +60,15 @@ USES_AWS = os.getenv('ARTHUR_USES_AWS', True)
 # For local testing, use awsconfig file to avoid messing with system's
 # environment variables. This is done by not including awsconfig in
 # online version.
-AWSCONFIG_PATH = 
+AWSCONFIG_PATH = os.path.realpath(
+    os.path.abspath(
+        os.path.join(
+            os.path.split(
+                inspect.getfile(
+                    inspect.currentframe()
+                )
+            )[0],
+            'awsconfig'
+        )
+    )
+)
