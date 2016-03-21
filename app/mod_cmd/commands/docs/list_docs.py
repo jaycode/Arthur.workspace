@@ -17,14 +17,14 @@ base_path = os.path.realpath(
         )
     )
 )
-print base_path
 sys.path.append(base_path)
 
 from app.mod_cmd.client_instruction import ClientInstruction
 from app.helpers import docs_path, save_project
 from zipfile import ZipFile
-from app import mongo
+from app import app, mongo
 from libs.arthur.clusterer.dumb_clusterer import DumbClusterer
+from libs.filesystem import Filesystem
 
 def run(project = None, args = [], **kwargs):
     """List all documents in this project.
@@ -40,6 +40,10 @@ def run(project = None, args = [], **kwargs):
 def list_docs(project):
     """List all documents in a project
 
+    >>> from libs.arthur.project import ArthurProject
+    >>> project = ArthurProject()
+    >>> list_docs(project)
+
     Attr:
         project: Project to get list of documents from
     """
@@ -50,20 +54,22 @@ def list_docs(project):
             'message': "Please load a project first with command `load_project [project name]`"
         })
     else:
-        path = docs_path()
+        fs = Filesystem(connect_to=app.config['FILESYSTEM'], config_file=app.config['AWSCONFIG_PATH'])
+        rawpath = docs_path()
         del project.active_doc
         project.active_doc = None
         save_project(project)
 
-        with ZipFile(path, 'r') as zipfile:
-            instruction = ClientInstruction({
-                'pass_project': True,
-                'pass_docs': True,
-                'docs': get_doc_infos(project, zipfile),
-                'project': project.to_dict(),
-                'page': '#doc-list',
-                'message': "Listing documents of project %s" % project.name
-            })
+        with fs.get_path(rawpath) as path:
+            with ZipFile(path, 'r') as zipfile:
+                instruction = ClientInstruction({
+                    'pass_project': True,
+                    'pass_docs': True,
+                    'docs': get_doc_infos(project, zipfile),
+                    'project': project.to_dict(),
+                    'page': '#doc-list',
+                    'message': "Listing documents of project %s" % project.name
+                })
     return [project, instruction]
 
 def get_doc_infos(project, zipfile):
