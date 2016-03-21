@@ -3,6 +3,7 @@
 from app.mod_cmd.client_instruction import ClientInstruction
 from app.helpers import docs_path
 from zipfile import ZipFile
+from app import app, mongo
 
 def run(project = None, args = [], **kwargs):
     """Show status of current project. Keep checking this often!
@@ -22,8 +23,10 @@ def run(project = None, args = [], **kwargs):
             active_doc = app.session['last_loaded_doc']
         
         path = docs_path()
-        with ZipFile(path, 'r') as zipfile:
-            docs = len(zipfile.namelist())
+
+        with app.get_path(path) as path:
+            with ZipFile(path, 'r') as zipfile:
+                docs = len(zipfile.namelist())
         current_context = project.context['name']
         dfcount = mongo.db.data_fields.count({'project_id': project._id})
 

@@ -10,3 +10,4 @@ redis>=2.10.5
 numpy
 scipy
 scikit-learn
+boto3

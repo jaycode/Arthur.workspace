@@ -43,8 +43,9 @@ def load_doc(name, doctype = None, project = None):
     else:
         try:
             path = docs_path()
-            with ZipFile(path, 'r') as docs:
-                text = docs.read(name)
+            with app.get_path(path) as path:
+                with ZipFile(path, 'r') as docs:
+                    text = docs.read(name)
             doc = ArthurDocument(text=text, doctype=doctype, name=name)
             project.active_doc = doc
             save_project(project)

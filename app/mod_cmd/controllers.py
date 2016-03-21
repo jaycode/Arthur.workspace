@@ -31,10 +31,8 @@ class WorkspaceConnection(sockjs.tornado.SockJSConnection):
         from app.mod_cmd.commands.docs.list_docs import list_docs
         from client_instruction import ClientInstruction
 
-        session_id = info.cookies.get('session').value
-        app.session = Session(app.session_store, session_id)
-
-        app.session['active_user'] = 'default'
+        self.info = info
+        self._prepare_session(app)
 
         # Send that someone joined
         self.broadcast(self.participants, "%s joined." % self.session.conn_info.ip)
@@ -100,3 +98,10 @@ class WorkspaceConnection(sockjs.tornado.SockJSConnection):
             instruction.set_value('project', project.to_dict())
 
         return (project, instruction)
+
+    def _prepare_session(self, app):
+        if not hasattr(app, 'session'):
+            session_id = self.info.cookies.get('session').value
+            app.session = Session(app.session_store, session_id)
+
+            app.session['active_user'] = 'default'

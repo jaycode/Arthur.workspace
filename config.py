@@ -51,3 +51,33 @@ SECRET_KEY = os.getenv('ARTHUR_SECRET_KEY', 'ln129ej1-kl')
 REDIS_HOST = os.getenv('ARTHUR_REDIS_HOST', '192.168.99.100')
 REDIS_PORT = os.getenv('ARTHUR_REDIS_PORT', 6379)
 REDIS_PASSWORD = os.getenv('ARTHUR_REDIS_PASSWORD', '')
+
+# Filesystem settings
+
+# temporary directory where we keep documents from AWS.
+TMP_DIR = os.getenv('ARTHUR_TMP_DIR', 'tmp')
+
+# None or 'aws-s3'
+FILESYSTEM = os.getenv('ARTHUR_FILESYSTEM', 'aws-s3')
+AWS_BUCKET = os.getenv('ARTHUR_AWS_BUCKET', 'arthur-storage')
+AWS_ROOTDIR = os.getenv('ARTHUR_AWS_ROOTDIR', 'workspace')
+
+# Set the rest of settings through environment variables. See:
+# https://boto3.readthedocs.org/en/latest/guide/configuration.html
+# Note: prefix ARTHUR_ is thus NOT needed here.
+
+# For local testing, use awsconfig file to avoid messing with system's
+# environment variables. This is done by not including awsconfig in
+# online version.
+AWSCONFIG_PATH = os.path.realpath(
+    os.path.abspath(
+        os.path.join(
+            os.path.split(
+                inspect.getfile(
+                    inspect.currentframe()
+                )
+            )[0],
+            'awsconfig'
+        )
+    )
+)

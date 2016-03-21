@@ -1,9 +1,28 @@
 """List documents in current ArthurProject
 """
+import os, sys, inspect
+# This needs to be included here to ensure path is loaded from app main directory.
+base_path = os.path.realpath(
+    os.path.abspath(
+        os.path.join(
+            os.path.split(
+                inspect.getfile(
+                    inspect.currentframe()
+                )
+            )[0],
+            '..',
+            '..',
+            '..',
+            '..'
+        )
+    )
+)
+sys.path.append(base_path)
+
 from app.mod_cmd.client_instruction import ClientInstruction
 from app.helpers import docs_path, save_project
 from zipfile import ZipFile
-from app import mongo
+from app import app, mongo
 from libs.arthur.clusterer.dumb_clusterer import DumbClusterer
 
 def run(project = None, args = [], **kwargs):
@@ -18,20 +37,42 @@ def run(project = None, args = [], **kwargs):
     return [project, instruction]
 
 def list_docs(project):
-    path = docs_path()
-    del project.active_doc
-    project.active_doc = None
-    save_project(project)
+    """List all documents in a project
 
-    with ZipFile(path, 'r') as zipfile:
+    >>> from libs.arthur.project import ArthurProject
+    >>> project = ArthurProject()
+    >>> app.init_session('sessionid')
+    >>> app.session['active_user'] = 'default'
+    >>> app.session['active_project'] = 'risky'
+    >>> project, instruction = list_docs(project)
+    >>> print instruction.get_value('message') # doctest:+ELLIPSIS
+    Listing documents of project ...
+
+    Attr:
+        project: Project to get list of documents from
+    """
+    if project == None:
         instruction = ClientInstruction({
-            'pass_project': True,
-            'pass_docs': True,
-            'docs': get_doc_infos(project, zipfile),
-            'project': project.to_dict(),
-            'page': '#doc-list',
-            'message': "Listing documents of project %s" % project.name
+            'pass_project': False,
+            'pass_docs': False,
+            'message': "Please load a project first with command `load_project [project name]`"
         })
+    else:
+        rawpath = docs_path()
+        del project.active_doc
+        project.active_doc = None
+        save_project(project)
+
+        with app.get_path(rawpath) as path:
+            with ZipFile(path, 'r') as zipfile:
+                instruction = ClientInstruction({
+                    'pass_project': True,
+                    'pass_docs': True,
+                    'docs': get_doc_infos(project, zipfile),
+                    'project': project.to_dict(),
+                    'page': '#doc-list',
+                    'message': "Listing documents of project %s" % project.name
+                })
     return [project, instruction]
 
 def get_doc_infos(project, zipfile):
@@ -39,10 +80,12 @@ def get_doc_infos(project, zipfile):
 
     Make sure that the zipfile is already opened before passing it here.
     One way to call this, for example:
-    >>> with ZipFile(filepath, 'r') as zipfile:
-    >>>     get_doc_infos(zipfile)
+    >>> # filepath = 'file.zip'
+    >>> # with ZipFile(filepath, 'r') as zipfile:
+    >>> #     get_doc_infos(zipfile)
 
     Attr:
+        project: Arthur project.
         zipfile: Zip file handler.
 
     Returns:
@@ -69,3 +112,8 @@ def get_doc_infos(project, zipfile):
             'num_data_fields_total': num_data_fields_total
         })
     return docinfos
+
+if __name__ == '__main__':
+    import doctest
+    import pdb
+    doctest.testmod()
