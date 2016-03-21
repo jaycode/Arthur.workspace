@@ -9,6 +9,7 @@ import io
 import os, errno
 import ConfigParser
 from zipfile import ZipFile
+import mimetypes
 
 class Filesystem():
     """Filesystem class
@@ -74,7 +75,9 @@ class Filesystem():
                 if e.errno != errno.EEXIST:
                     raise
             md5 = obj.get()['ETag'].replace('"', '')
-            localpath = os.path.join(self.tmpdir, md5)
+            ext = mimetypes.guess_extension(obj.get()['ContentType'])
+            filename = "%s%s" % (md5,ext)
+            localpath = os.path.join(self.tmpdir, filename)
             if not os.path.exists(localpath):
                 self.bucket.download_file(s3path, localpath)
             yield localpath
