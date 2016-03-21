@@ -24,7 +24,6 @@ from app.helpers import docs_path, save_project
 from zipfile import ZipFile
 from app import app, mongo
 from libs.arthur.clusterer.dumb_clusterer import DumbClusterer
-from libs.filesystem import Filesystem
 
 def run(project = None, args = [], **kwargs):
     """List all documents in this project.
@@ -42,7 +41,12 @@ def list_docs(project):
 
     >>> from libs.arthur.project import ArthurProject
     >>> project = ArthurProject()
-    >>> list_docs(project)
+    >>> app.init_session('sessionid')
+    >>> app.session['active_user'] = 'default'
+    >>> app.session['active_project'] = 'risky'
+    >>> project, instruction = list_docs(project)
+    >>> print instruction.get_value('message') # doctest:+ELLIPSIS
+    Listing documents of project ...
 
     Attr:
         project: Project to get list of documents from
@@ -54,13 +58,12 @@ def list_docs(project):
             'message': "Please load a project first with command `load_project [project name]`"
         })
     else:
-        fs = Filesystem(connect_to=app.config['FILESYSTEM'], config_file=app.config['AWSCONFIG_PATH'])
         rawpath = docs_path()
         del project.active_doc
         project.active_doc = None
         save_project(project)
 
-        with fs.get_path(rawpath) as path:
+        with app.get_path(rawpath) as path:
             with ZipFile(path, 'r') as zipfile:
                 instruction = ClientInstruction({
                     'pass_project': True,
@@ -77,11 +80,9 @@ def get_doc_infos(project, zipfile):
 
     Make sure that the zipfile is already opened before passing it here.
     One way to call this, for example:
-    >>> from libs.arthur.project import ArthurProject
-    >>> project = ArthurProject()
-    >>> filepath = ''
-    >>> with ZipFile(filepath, 'r') as zipfile:
-    ...     get_doc_infos(zipfile)
+    >>> # filepath = 'file.zip'
+    >>> # with ZipFile(filepath, 'r') as zipfile:
+    >>> #     get_doc_infos(zipfile)
 
     Attr:
         project: Arthur project.

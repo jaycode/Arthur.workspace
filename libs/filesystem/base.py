@@ -39,7 +39,7 @@ class Filesystem():
             self.bucket = self.s3.Bucket(bucket_name)
 
     @contextmanager
-    def get_path(self, path=""):
+    def get_path(self, path="", base_dir=""):
         """Get either a path or io.BytesIO instance.
 
         The following code shows an example where we get a zip file from storage
@@ -61,13 +61,17 @@ class Filesystem():
         test.txt
 
         Args:
-            path(string): A path that will be converted or used.
+            path(string): An absolute path that will be converted or used.
+            base_dir(string): Absolute path pointing to the base directory to be removed from
+                              path when used to connect to remote storage. e.g.
+                              if the app path is `/media/disk/app/` and path is `/media/disk/app/storage/file.txt`
+                              then it is expected that remote storage's path should be `storage/file.txt`.
 
         Returns:
             string: Path usable in both local and remote scenarios.
         """
         if self.s3 != None:
-            s3path = self.key_from_path(path)
+            s3path = self.key_from_path(path, base_dir)
             obj = self.bucket.Object(key=s3path)
             try:
                 os.makedirs(self.tmpdir)
@@ -84,16 +88,21 @@ class Filesystem():
         else:
             yield path
 
-    def key_from_path(self, path=""):
+    def key_from_path(self, path="", base_dir=""):
         """Turn path into key to use in 3rd party storage.
 
-        Currently this is as simple as prefixing path with rootdir value.
+        Currently this is as simple as removing base dir from path, then
+        prefixing it with rootdir value.
 
         Args:
             path(string): Path to be converted into key.
+            base_dir(string): Base directory path to be removed from path.
         Returns:
             string: Key version of given path.
         """
+        path = path.replace(base_dir, '')
+        if path[0] == os.path.sep:
+            path = path[1:]
         return os.path.join(self.rootdir, path)
 
 if __name__ == '__main__':

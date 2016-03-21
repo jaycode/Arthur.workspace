@@ -14,7 +14,9 @@ import logging
 from mod_cmd.controllers import WorkspaceConnection
 import config
 from redis import Redis
-from libs.redis_session.for_tornado import RedisSessionStore
+from libs.redis_session.for_tornado import RedisSessionStore, Session
+from libs.filesystem import Filesystem
+
 
 class MongoClient(mongo_client.MongoClient):
     """Replace 'db' with config.MONGO_DBNAME to make this similar to Flask-PyMongo
@@ -49,7 +51,7 @@ logging.getLogger().setLevel(logging.DEBUG)
 WorkspaceRouter = sockjs.tornado.SockJSRouter(WorkspaceConnection, '')
 
 class IndexHandler(tornado.web.RequestHandler):
-    """Just a page to show if server is up"""
+    """Just a page to show if server is up."""
     def get(self):
         self.render('index.html')
 
@@ -57,6 +59,8 @@ class Application(tornado.web.Application):
     config = {} # for simpler config access.
     session_store = None # Session store, not the actual session (session can only be set right after first request).
     def __init__(self, config):
+        """Initialize Application object.
+        """
         handlers = [(r"/", IndexHandler)] + WorkspaceRouter.urls
         self.config = config
         settings = {
@@ -64,7 +68,21 @@ class Application(tornado.web.Application):
         }
         redis_conn = Redis(host=self.config['REDIS_HOST'], port=self.config['REDIS_PORT'], password=self.config['REDIS_PASSWORD'])
         self.session_store = RedisSessionStore(redis_conn)
+
+        self.fs = Filesystem(connect_to=self.config['FILESYSTEM'], bucket_name=self.config['AWS_BUCKET'],
+                             rootdir=self.config['AWS_ROOTDIR'], config_file=self.config['AWSCONFIG_PATH'],
+                             tmpdir=self.config['TMP_DIR'])
+
         super(Application, self).__init__(handlers, **settings)
+    
+    def init_session(self, sessionid):
+        """For testing
+        """
+        self.session = Session(self.session_store, sessionid)
+
+    def get_path(self, path):
+        return self.fs.get_path(path, self.config['BASE_DIR'])
+
 
 attrs = filter(lambda x: x[0] != '_' and str.isupper(x[0]), dir(config))
 mapped_config = {}

@@ -53,9 +53,13 @@ REDIS_PORT = os.getenv('ARTHUR_REDIS_PORT', 6379)
 REDIS_PASSWORD = os.getenv('ARTHUR_REDIS_PASSWORD', '')
 
 # Filesystem settings
+
+# temporary directory where we keep documents from AWS.
+TMP_DIR = os.getenv('ARTHUR_TMP_DIR', 'tmp')
+
 # None or 'aws-s3'
 FILESYSTEM = os.getenv('ARTHUR_FILESYSTEM', 'aws-s3')
-AWS_BUCKET = os.getenv('ARTHUR_AWS_BUCKET' 'arthur-storage')
+AWS_BUCKET = os.getenv('ARTHUR_AWS_BUCKET', 'arthur-storage')
 AWS_ROOTDIR = os.getenv('ARTHUR_AWS_ROOTDIR', 'workspace')
 
 # Set the rest of settings through environment variables. See:
