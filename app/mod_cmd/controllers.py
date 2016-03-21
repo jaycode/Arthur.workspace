@@ -6,7 +6,6 @@ import glob
 import importlib
 from libs.arthur import ArthurProject
 from helpers import get_package
-import pdb
 import sockjs.tornado
 import json
 from libs.redis_session.for_tornado import Session
@@ -22,6 +21,12 @@ class WorkspaceConnection(sockjs.tornado.SockJSConnection):
         """
 
     def on_open(self, info):
+        """What to do when connection first opened up.
+
+        Args:
+            info(ConnectionInfo): ConnectionInfo object, contains request information like session and cookies.
+                                  See sockjs.tornado.session module.
+        """
         # Todo: Multiple connect not working well. Need to learn SocketJS' behaviors.
         # for participant in self.participants:
         #     if participant.session.conn_info.ip == self.session.conn_info.ip:
@@ -101,7 +106,16 @@ class WorkspaceConnection(sockjs.tornado.SockJSConnection):
 
     def _prepare_session(self, app):
         if not hasattr(app, 'session'):
-            session_id = self.info.cookies.get('session').value
+            # Somehow in bluemix self.info.cookies.get('session') is empty, perhaps
+            # since domain was different, so the following method can't be used:
+            #
+            # session_id = self.info.cookies.get('session').value
+            #
+            # Instead, we pass session id in our path, so self.info.path
+            # would look something like:
+            # /291/cbf078ec-019e-45d0-af99-416263da4169/websocket
+            #
+            session_id = self.info.path.split('/')[2]
             app.session = Session(app.session_store, session_id)
 
             app.session['active_user'] = 'default'
